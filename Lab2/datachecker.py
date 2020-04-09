@@ -29,7 +29,7 @@ class DataChecker:
     def customer_has_equipment_attached(self, customerID):
         self.cursor.execute("""SELECT * FROM Customers WHERE ID == ?;""", (customerID,))
         self.conn.commit()
-        customers = cursor.fetchall()
+        customers = self.cursor.fetchall()
 
         if len(customers) == 0:
             print("Customer ID not found in DB")
