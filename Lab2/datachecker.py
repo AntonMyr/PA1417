@@ -27,7 +27,7 @@ class DataChecker:
             return True
 
     def customer_has_equipment_attached(self, customerID):
-        cursor.execute("""SELECT * FROM Customers WHERE ID == ?;""", (customerID,))
+        self.cursor.execute("""SELECT * FROM Customers WHERE ID == ?;""", (customerID,))
         conn.commit()
         customers = cursor.fetchall()
 
