@@ -1,16 +1,17 @@
 import sqlite3
 from customer import Customer
 
+
 class DataChecker:
     def __init__(self):
         self.conn = sqlite3.connect("pos.db")
         self.cursor = self.conn.cursor()
-        
+
     def check_valid_age(self, age):
         try:
             int(age)
         except ValueError:
-            print('Non-valid integer input')
+            print("Non-valid integer input")
             return False
 
         if age < 0:
@@ -36,18 +37,35 @@ class DataChecker:
             return False
 
         customer = customers[0]
-        tmp_customer = Customer(ID=customer[0], Firstname=customer[1], Lastname=customer[2], Age=customer[3], Sex=customer[4], Street=customer[5], Zip=customer[6], City=customer[7], Nationality=customer[8], IMSIPtr=customer[9], IMEIPtr=customer[10], SubscriptionPtr=customer[11], Email=customer[12], Password=customer[13])
+        tmp_customer = Customer(
+            ID=customer[0],
+            Firstname=customer[1],
+            Lastname=customer[2],
+            Age=customer[3],
+            Sex=customer[4],
+            Street=customer[5],
+            Zip=customer[6],
+            City=customer[7],
+            Nationality=customer[8],
+            IMSIPtr=customer[9],
+            IMEIPtr=customer[10],
+            SubscriptionPtr=customer[11],
+            Email=customer[12],
+            Password=customer[13],
+        )
 
         # Fetch equipment
         if tmp_customer.IMEIPtr != None:
-            cursor.execute("""SELECT * FROM Equipment WHERE ID = ?;""", (tmp_customer.IMEIPtr,))
+            self.cursor.execute(
+                """SELECT * FROM Equipment WHERE ID = ?;""", (tmp_customer.IMEIPtr,)
+            )
             conn.commit()
             equipment = cursor.fetchone()
 
             if len(equipment) == 0:
-                print('Customer has equipment ID but ID cant be found in DB.')
+                print("Customer has equipment ID but ID cant be found in DB.")
                 return False
-                
+
         else:
-            print('Customer has no equipment attached to profile.')
+            print("Customer has no equipment attached to profile.")
             return False
