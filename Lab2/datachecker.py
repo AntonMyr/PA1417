@@ -59,8 +59,8 @@ class DataChecker:
             self.cursor.execute(
                 """SELECT * FROM Equipment WHERE ID = ?;""", (tmp_customer.IMEIPtr,)
             )
-            conn.commit()
-            equipment = cursor.fetchone()
+            self.conn.commit()
+            equipment = self.cursor.fetchone()
 
             if len(equipment) == 0:
                 print("Customer has equipment ID but ID cant be found in DB.")
