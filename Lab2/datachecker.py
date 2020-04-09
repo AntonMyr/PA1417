@@ -20,8 +20,8 @@ class DataChecker:
         return True
 
     def check_valid_text_field(self, input, emptyTextNotAllowed=True):
-        if len(input) <= 0 and emptyTextNotAllowed == False:
-            print('Empty textfield not allowed')
+        if len(input) <= 0 and emptyTextNotAllowed:
+            print("Empty textfield not allowed")
             return False
         else:
             return True
