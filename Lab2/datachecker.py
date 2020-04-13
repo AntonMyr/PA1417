@@ -62,7 +62,7 @@ class DataChecker:
             self.conn.commit()
             equipment = self.cursor.fetchone()
 
-            if len(equipment) == 0:
+            if not equipment:
                 print("Customer has equipment ID but ID cant be found in DB.")
                 return False
 
